@@ -1,0 +1,1 @@
+{"name":"dokhtar-e-mah","version":"1.0.0","private":true,"description":"Dokhtar-e Mah Persian girls day website with consent-based admin dashboard","main":"server.js","scripts":{"start":"node server.js"},"engines":{"node":">=18"},"dependencies":{"express":"^4.21.2","express-session":"^1.18.1"}}

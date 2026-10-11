@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#160d35">
+<title>دخترِ ماه | ساخته‌شده توسط Sirous</title>
+<style>
+:root{--night:#100925;--purple:#241044;--pink:#ffb8e7;--gold:#ffd98a;--white:#fff8ff}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% 10%,#4b236e 0%,#21103e 34%,#100925 78%);color:var(--white);font-family:Tahoma,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+#stars{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.star{position:absolute;width:2px;height:2px;background:#fff7d8;border-radius:50%;opacity:.7;animation:twinkle 2.5s infinite alternate}
+@keyframes twinkle{from{opacity:.2;transform:scale(.7)}to{opacity:1;transform:scale(1.4)}}
+.moon{position:relative;width:112px;height:112px;margin:20px auto 14px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff9dd,#ffe0a1 45%,#eeb7f3 80%);box-shadow:0 0 28px #ffd98a99,0 0 85px #ffb8e755}
+.wrap{position:relative;z-index:1;max-width:900px;margin:auto;padding:22px 16px 44px;text-align:center}
+.eyebrow{color:var(--gold);letter-spacing:2px;font-size:.82rem}
+h1{font-size:clamp(2.1rem,7vw,4rem);margin:12px 0;color:#fff3fd;text-shadow:0 0 25px #f2a7ed66}
+.subtitle{line-height:2;color:#f3ddff;max-width:650px;margin:0 auto 24px}
+.card{max-width:640px;margin:20px auto;padding:22px;border:1px solid #ffe3b855;border-radius:26px;background:linear-gradient(145deg,#ffffff12,#a57bd313);box-shadow:0 18px 60px #0003;backdrop-filter:blur(8px)}
+input,select{width:min(100%,400px);padding:14px 16px;border-radius:14px;border:1px solid #f9d5f2;background:#fff9ff;color:#241044;font-size:1rem;text-align:center;outline:none}
+label.consent{display:flex;gap:10px;align-items:flex-start;justify-content:center;text-align:right;line-height:1.8;margin:14px auto;max-width:520px;font-size:.86rem;color:#f3ddff}
+label.consent input{width:20px;min-width:20px;margin-top:5px;accent-color:#ffb8e7}
+button{font-family:inherit;font-weight:bold;font-size:1rem;border:0;border-radius:999px;padding:13px 22px;cursor:pointer;transition:transform .18s,filter .18s}
+button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.primary{background:linear-gradient(100deg,#ffb8e7,#ffd98a);color:#321345;box-shadow:0 8px 25px #ffb8e733}
+.secondary{background:#ffffff13;color:#fff2ff;border:1px solid #ffdcf4aa}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hidden{display:none!important}
+.world{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px auto;max-width:700px}
+.place{min-height:118px;border:1px solid #ffe1f455;background:linear-gradient(150deg,#6d3b8e66,#251343cc);border-radius:22px;padding:16px;color:#fff5ff}
+.place .emoji{font-size:2rem;display:block;margin-bottom:8px}
+.message{font-size:1.1rem;line-height:2;color:#ffe8f8}
+.badge{display:inline-block;margin:8px;padding:9px 15px;border-radius:999px;background:#ffe2f222;border:1px solid #ffe0f077;color:var(--gold)}
+.gift{font-size:4rem;filter:drop-shadow(0 0 16px #ffd98a88);animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+textarea{width:100%;min-height:90px;border-radius:16px;padding:14px;font:inherit;resize:vertical}
+.small{font-size:.8rem;color:#d9c6e9;line-height:1.8}
+footer{margin-top:35px;color:#cdb9e0;font-size:.82rem}
+.music-control{position:fixed;z-index:5;left:12px;bottom:12px;background:#21113beF;color:#fff4ff;border:1px solid #ffe0f077;box-shadow:0 8px 30px #0005}
+.music-panel{position:fixed;z-index:8;left:12px;bottom:76px;width:min(340px,calc(100vw - 24px));padding:16px;background:#1b1030;border:1px solid #ffe0f088;border-radius:20px;box-shadow:0 12px 36px #0009;text-align:center}
+.music-panel audio{display:block;width:100%;margin-top:12px}
+@media(max-width:520px){.world{grid-template-columns:1fr}.card{padding:18px 14px}.moon{width:88px;height:88px}}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<button id="musicButton" class="music-control" type="button" aria-pressed="false">🎵 پخش آهنگ روز دختر</button>
+<div id="musicPanel" class="music-panel hidden" aria-label="پخش‌کنندهٔ آهنگ روز دختر"><div class="actions" style="margin:0 0 8px"><strong>🎶 روزت مبارک</strong><button id="closeMusic" class="secondary" type="button" style="padding:7px 12px">بستن ✕</button></div><audio id="daySong" controls preload="metadata" playsinline src="./music/Rozet-Mobarak.mp3">مرورگر شما پخش صوت را پشتیبانی نمی‌کند.</audio><p id="musicStatus" class="small" role="status">برای پخش، دکمهٔ پخش را لمس کن.</p><p class="small">آهنگ ارسالی شما؛ فقط صدا پخش می‌شود، بدون ویدیو.</p></div>
+<main class="wrap">
+  <section id="intro">
+    <div class="moon" aria-hidden="true"></div>
+    <div class="eyebrow">یک سفر کوچک میان ستاره‌ها</div>
+    <h1>دخترِ ماه</h1>
+    <p class="subtitle">به دنیایی خوش آمدی که برای رویاها، لبخندها و درخشش تو ساخته شده است.</p>
+    <div class="card">
+      <p>برای ورود به قصر ماه، اسمت رو بنویس ✨</p>
+      <input id="visitorName" maxlength="32" placeholder="اسم یا لقب تو..." autocomplete="nickname"><br><br>
+      <label for="favoriteColor">رنگ موردعلاقه‌ات:</label><br><br>
+      <select id="favoriteColor"><option value="نامشخص">انتخاب کن...</option><option>بنفش</option><option>صورتی</option><option>آبی</option><option>مشکی</option><option>سفید</option><option>سبز</option><option>طلایی</option><option>قرمز</option><option>رنگ‌های پاستلی</option></select>
+      <label class="consent"><input type="checkbox" id="dataConsent"><span>موافقم اسم یا لقب، رنگ موردعلاقه و انتخاب‌هایم برای صاحب سایت ذخیره شود تا آمار علاقه‌مندی‌ها را ببیند. نوشتن آرزو اختیاری است؛ اطلاعاتم عمومی نمایش داده نمی‌شود.</span></label>
+      <div class="actions"><button class="primary" id="enterButton">ورود به دنیای جادو ✨</button></div>
+      <p class="small">اگر تیک رضایت را نزنی، اطلاعاتت ذخیره نمی‌شود. اطلاعات انتخابی فقط با رضایتت ذخیره می‌شود و مدیر سایت می‌تواند آن‌ها را در پنل رمزدار ببیند.</p>
+    </div>
+  </section>
+
+  <section id="palace" class="hidden">
+    <div class="moon" aria-hidden="true"></div>
+    <div class="eyebrow">قصر ماه از تو استقبال می‌کند</div>
+    <h1 id="welcomeTitle">خوش اومدی!</h1>
+    <p id="personalMessage" class="subtitle"></p>
+    <span class="badge" id="titleBadge">✨ نگهبان ستاره‌ها</span>
+    <div class="world">
+      <button class="place" data-view="greeting"><span class="emoji">💖</span>تبریک روز دختر</button>
+      <button class="place" data-view="gift"><span class="emoji">🎁</span>جعبهٔ هدیه</button>
+      <button class="place" data-view="wish"><span class="emoji">🌷</span>باغ آرزوها</button>
+      <button class="place" data-view="card"><span class="emoji">💌</span>کارت جادویی</button>
+    </div>
+    <div id="content" class="card hidden"></div>
+    <div class="actions"><button class="secondary" id="backButton">بازگشت به نقشه</button></div>
+  </section>
+  <footer>ساخته‌شده با خیال و جادو · Created by Sirous</footer>
+</main>
+<!-- فرم استاتیک برای شناسایی توسط Netlify Forms؛ اطلاعات فقط با رضایت بازدیدکننده ارسال می‌شود. -->
+<form name="visitor-insights" method="POST" data-netlify="true" hidden>
+  <input type="hidden" name="form-name" value="visitor-insights">
+  <input name="nickname"><input name="favorite_color"><input name="action"><input name="fantasy_title"><input name="wish"><input name="consent">
+</form>
+<script>
+const $=s=>document.querySelector(s);
+const stars=$('#stars');
+for(let i=0;i<90;i++){const e=document.createElement('i');e.className='star';e.style.left=Math.random()*100+'%';e.style.top=Math.random()*100+'%';e.style.animationDelay=(Math.random()*3)+'s';e.style.opacity=(.25+Math.random()*.7);stars.appendChild(e);}
+let visitor='دوست ماه', activeView='', favoriteColor='نامشخص', dataConsent=false;
+const musicButton=$('#musicButton');
+function chooseTitle(name){const titles=['نگهبان ماه','ملکهٔ رویاها','نگهبان ستاره‌ها','پریِ باغ ماه','شجاعِ سپیده‌دم','شاعرِ ستاره‌ها'];let n=0;for(let i=0;i<name.length;i++)n=(n+name.charCodeAt(i)*7)%997;return titles[n%titles.length];}
+$('#enterButton').addEventListener('click',async()=>{
+  dataConsent=$('#dataConsent').checked;
+  visitor=$('#visitorName').value.trim()||'دوست ماه';
+  favoriteColor=$('#favoriteColor').value;
+  await sendInsight({nickname:visitor,favorite_color:favoriteColor,action:'ورود به قصر ماه',fantasy_title:chooseTitle(visitor)});
+  $('#welcomeTitle').textContent='خوش اومدی، '+visitor+'! 🌙';
+  $('#personalMessage').textContent='این دنیا امروز کمی روشن‌تره، چون '+visitor+' به قصر ماه رسیده.';
+  $('#titleBadge').textContent='✨ '+chooseTitle(visitor);
+  $('#intro').classList.add('hidden');$('#palace').classList.remove('hidden');
+});
+function render(view){
+  activeView=view;const c=$('#content');c.classList.remove('hidden');
+  if(view==='greeting'){
+    sendInsight({nickname:visitor,favorite_color:favoriteColor,action:'بازکردن تبریک روز دختر',fantasy_title:chooseTitle(visitor)});
+    c.innerHTML=`<div class="eyebrow">یک پیام مخصوص تو</div><h2>روز دختر مبارک، ${escapeHtml(visitor)}! 🌸</h2><p class="message">امیدوارم مسیر زندگی‌ات پر از فرصت‌های قشنگ، آدم‌های مهربان و رویاهایی باشه که یکی‌یکی به حقیقت تبدیل می‌شن. فراموش نکن که درخشش تو، مال خودته. 💖</p><div class="actions"><button class="primary" id="sceneMusic">🎵 پخش آهنگ روز دختر</button><button class="secondary" id="stopMusic">⏸ توقف آهنگ</button></div><p class="small">با لمس دکمه، فقط فایل صوتی پخش می‌شود؛ ویدیویی نمایش داده نمی‌شود.</p>`;
+    $('#sceneMusic').onclick=playMusic;$('#stopMusic').onclick=stopMusic;
+  } else if(view==='gift'){
+    sendInsight({nickname:visitor,favorite_color:favoriteColor,action:'بازکردن جعبهٔ هدیه',fantasy_title:chooseTitle(visitor)});
+    c.innerHTML=`<div class="gift">🎁</div><h2>یک هدیه برای ${escapeHtml(visitor)}</h2><p class="message">شاید جادویی‌ترین هدیه، یادآوری این باشه که تو شایستهٔ احترام، آرامش و شادی هستی.</p><button class="primary" id="openGift">باز کردن هدیه ✨</button><p id="giftReveal" class="message hidden">🌟 آرزو می‌کنم روزهای پیش‌رو برات پر از اتفاق‌های روشن و دوست‌داشتنی باشن!</p>`;
+    $('#openGift').onclick=()=>$('#giftReveal').classList.remove('hidden');
+  } else if(view==='wish'){
+    sendInsight({nickname:visitor,favorite_color:favoriteColor,action:'بازکردن باغ آرزوها',fantasy_title:chooseTitle(visitor)});
+    c.innerHTML=`<h2>🌷 باغ آرزوها</h2><p>یک آرزوی قشنگ بنویس؛ می‌تونه فقط برای خودت بمونه.</p><textarea id="wishText" maxlength="300" placeholder="آرزوی من..."></textarea><div class="actions"><button class="primary" id="saveWish">کاشتن آرزو ✨</button></div><p id="wishResult" class="message"></p><p class="small">این نسخه آرزو را فقط در همین صفحه نشان می‌دهد و به سرور ارسال نمی‌کند.</p>`;
+    $('#saveWish').onclick=async()=>{const wish=$('#wishText').value.trim();$('#wishResult').textContent=wish?'🌷 آرزوت در باغ ماه شکوفه زد: '+wish:'اول آرزوت رو بنویس 🌙';if(wish&&dataConsent){await sendInsight({nickname:visitor,favorite_color:favoriteColor,action:'ثبت آرزو در باغ',wish:wish,fantasy_title:chooseTitle(visitor)});$('#wishResult').textContent+=' (با رضایتت برای مدیر سایت ذخیره شد)';}};
+  } else if(view==='card'){
+    sendInsight({nickname:visitor,favorite_color:favoriteColor,action:'بازکردن کارت جادویی',fantasy_title:chooseTitle(visitor)});
+    c.innerHTML=`<h2>💌 کارت جادویی تو</h2><div id="cardPreview" class="card"><div class="moon" style="width:66px;height:66px"></div><h2>روز دختر مبارک، ${escapeHtml(visitor)}!</h2><p class="message">برای تو که شایستهٔ روزهایی پر از نور و امیدی 🌙✨</p><span class="badge">${escapeHtml(chooseTitle(visitor))}</span></div><div class="actions"><button class="primary" id="saveCard">ذخیرهٔ کارت به‌صورت تصویر</button></div><p class="small" id="saveNote"></p>`;
+    $('#saveCard').onclick=saveCard;
+  }
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+document.querySelectorAll('.place').forEach(b=>b.addEventListener('click',()=>render(b.dataset.view)));
+$('#backButton').onclick=()=>{$('#content').classList.add('hidden');activeView='';};
+function playMusic(){
+  const panel=$('#musicPanel'), audio=$('#daySong'), status=$('#musicStatus');
+  panel.classList.remove('hidden');
+  status.textContent='در حال آماده‌کردن آهنگ…';
+  // فراخوانی play مستقیماً در واکنش به لمس کاربر انجام می‌شود تا با سیاست موبایل سازگارتر باشد.
+  const result=audio.play();
+  if(result && typeof result.then==='function'){
+    result.then(()=>{status.textContent='🎶 آهنگ در حال پخش است.';})
+      .catch(()=>{status.textContent='پخش خودکار شروع نشد؛ دکمهٔ ▶ داخل پخش‌کننده را لمس کن. اگر خطا ماند، فایل music/Rozet-Mobarak.mp3 را همراه سایت بارگذاری کن.';});
+  }
+  musicButton.textContent='⏹ توقف آهنگ';
+  musicButton.setAttribute('aria-pressed','true');
+}
+function stopMusic(){
+  const audio=$('#daySong');audio.pause();audio.currentTime=0;
+  $('#musicPanel').classList.add('hidden');
+  $('#musicStatus').textContent='برای پخش، دکمهٔ پخش را لمس کن.';
+  musicButton.textContent='🎵 پخش آهنگ روز دختر';
+  musicButton.setAttribute('aria-pressed','false');
+}
+$('#daySong').addEventListener('error',()=>{
+  $('#musicStatus').textContent='فایل آهنگ پیدا نشد. پوشهٔ music و فایل Rozet-Mobarak.mp3 باید کنار index.html روی سایت بارگذاری شوند.';
+});
+$('#daySong').addEventListener('playing',()=>{$('#musicStatus').textContent='🎶 آهنگ در حال پخش است.';});
+$('#daySong').addEventListener('pause',()=>{if($('#daySong').currentTime>0 && !$('#daySong').ended)$('#musicStatus').textContent='آهنگ متوقف شده است.';});
+musicButton.addEventListener('click',()=>{if($('#musicPanel').classList.contains('hidden'))playMusic();else stopMusic();});
+$('#closeMusic').addEventListener('click',stopMusic);
+$('#daySong').addEventListener('ended',()=>{musicButton.textContent='🎵 پخش آهنگ روز دختر';musicButton.setAttribute('aria-pressed','false');});
+async function sendInsight(data){
+  if(!dataConsent)return;
+  const payload={nickname:String(data.nickname||'').slice(0,32),favorite_color:String(data.favorite_color||'نامشخص').slice(0,40),action:String(data.action||'').slice(0,80),fantasy_title:String(data.fantasy_title||'').slice(0,80),wish:String(data.wish||'').slice(0,300),consent:true};
+  try{const response=await fetch('/api/insights',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!response.ok)console.warn('ذخیره اطلاعات انجام نشد.');}
+  catch(err){console.warn('اتصال به سرور برقرار نشد.',err);}
+}
+function saveCard(){
+  const title=`روز دختر مبارک، ${visitor}!`;
+  const subtitle=`برای تو که شایستهٔ روزهایی پر از نور و امیدی`;
+  const badge=chooseTitle(visitor);
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1b0c3b"/><stop offset="1" stop-color="#6b347d"/></linearGradient><radialGradient id="moon"><stop stop-color="#fff8d5"/><stop offset="1" stop-color="#f4b9e9"/></radialGradient></defs><rect width="900" height="1100" rx="48" fill="url(#bg)"/><circle cx="450" cy="220" r="100" fill="url(#moon)"/><text x="450" y="430" font-size="56" fill="#ffe4a0" text-anchor="middle" font-family="Tahoma,Arial">${escapeXml(title)}</text><text x="450" y="550" font-size="32" fill="#fff0fb" text-anchor="middle" font-family="Tahoma,Arial">${escapeXml(subtitle)}</text><text x="450" y="650" font-size="34" fill="#ffb8e7" text-anchor="middle" font-family="Tahoma,Arial">✦ ${escapeXml(badge)} ✦</text><text x="450" y="1000" font-size="25" fill="#ffe4a0" text-anchor="middle" font-family="Tahoma,Arial">دخترِ ماه · Created by Sirous</text></svg>`;
+  const blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='dokhtar-e-mah-card.svg';a.click();URL.revokeObjectURL(url);$('#saveNote').textContent='کارت آماده شد؛ اگر گوشی پرسید، فایل را ذخیره کن.';
+}
+function escapeXml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));}
+</script>
+</body>
+</html>
